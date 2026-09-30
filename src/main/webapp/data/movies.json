@@ -1,0 +1,43 @@
+
+[
+  {
+    "id": 1,
+    "title": "Interstellar",
+    "genre": "Sci-Fi",
+    "language": "English",
+    "duration": "2h 49m",
+    "rating": 8.7,
+    "price": 150,
+    "poster": "interstellar.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Inception",
+    "genre": "Sci-Fi, Thriller",
+    "language": "English",
+    "duration": "2h 28m",
+    "rating": 8.8,
+    "price": 150,
+    "poster": "inception.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Leo",
+    "genre": "Action, Thriller",
+    "language": "Tamil",
+    "duration": "2h 44m",
+    "rating": 7.2,
+    "price": 150,
+    "poster": "leo.jpg"
+  },
+  {
+    "id": 4,
+    "title": "The Batman",
+    "genre": "Action, Crime",
+    "language": "English",
+    "duration": "2h 56m",
+    "rating": 7.8,
+    "price": 150,
+    "poster": "batman.jpg"
+  }
+]

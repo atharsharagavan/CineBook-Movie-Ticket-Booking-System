@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body.auth-body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+    background:
+        radial-gradient(circle at 80% 20%, #381018 0%, transparent 35%),
+        #090909;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 1050px;
+    min-height: 620px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: #111;
+    border: 1px solid #292020;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+}
+
+.auth-visual {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 45px;
+    background:
+        linear-gradient(0deg, rgba(0,0,0,.92), rgba(0,0,0,.15)),
+        url('../images/cinema-bg.jpg') center/cover no-repeat,
+        linear-gradient(135deg, #42121b, #151515);
+}
+
+.auth-brand {
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.auth-brand span {
+    color: #ed334c;
+}
+
+.auth-tagline h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    line-height: 1.15;
+    margin: 0 0 18px;
+}
+
+.auth-tagline p {
+    color: #c4bcbc;
+    line-height: 1.8;
+    max-width: 350px;
+}
+
+.auth-form-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+}
+
+.auth-form {
+    width: 100%;
+    max-width: 370px;
+}
+
+.auth-form h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    margin: 0 0 10px;
+}
+
+.auth-subtitle {
+    color: #999;
+    margin-bottom: 32px;
+}
+
+.auth-form label {
+    display: block;
+    color: #ddd;
+    font-size: 13px;
+    margin: 18px 0 8px;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 15px 16px;
+    border: 1px solid #363030;
+    border-radius: 9px;
+    background: #1a1717;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    transition: .25s;
+}
+
+.auth-form input:focus {
+    border-color: #e63b50;
+    box-shadow: 0 0 0 3px rgba(230, 59, 80, .12);
+}
+
+.auth-button {
+    width: 100%;
+    margin-top: 28px;
+    padding: 15px;
+    border: none;
+    border-radius: 9px;
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #ed334c, #a90d29);
+    transition: .25s;
+}
+
+.auth-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(237, 51, 76, .25);
+}
+
+.auth-switch {
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    margin-top: 25px;
+}
+
+.auth-switch a {
+    color: #ed334c;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+.auth-error {
+    color: #ff7b8d;
+    background: rgba(237, 51, 76, .1);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+@media (max-width: 750px) {
+    body.auth-body {
+        padding: 15px;
+    }
+
+    .auth-container {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .auth-visual {
+        min-height: 220px;
+        padding: 25px;
+    }
+
+    .auth-tagline h1 {
+        font-size: 32px;
+    }
+
+    .auth-form-panel {
+        padding: 35px 25px;
+    }
+}
