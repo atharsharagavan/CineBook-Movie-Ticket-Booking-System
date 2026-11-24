@@ -114,9 +114,6 @@ Start MongoDB locally and leave `MONGODB_URI` unset, or set it to your local con
 4. Copy the cluster's driver connection string and substitute your database user's credentials. URL-encode special characters in the username or password.
 5. Set the completed string as `MONGODB_URI` in the app's environment.
 
-Do not commit the connection string, database password, or a `.env` file to GitHub.
-
-> You can open the live site and browse the movie catalogue from any device with Internet access. Registration, login, and booking history require MongoDB, so those features will not work while the Atlas cluster is paused. To use them again, resume the cluster in Atlas; you do not need to restart or redeploy the Vercel app.
 
 ## Vercel deployment
 
@@ -148,7 +145,7 @@ The live site is public. Never put `MONGODB_URI` in frontend code or expose it t
 
 ## Developer
 
-**Atharsha Ragan**  
+**Atharsha Ragavan**  
 GitHub: [@atharsharagavan](https://github.com/atharsharagavan)
 
 ## License
