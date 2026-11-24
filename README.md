@@ -148,6 +148,4 @@ The live site is public. Never put `MONGODB_URI` in frontend code or expose it t
 **Atharsha Ragavan**  
 GitHub: [@atharsharagavan](https://github.com/atharsharagavan)
 
-## License
 
-No separate license file is currently included in this repository. Add a `LICENSE` file before redistributing the project under a specific open-source license.
