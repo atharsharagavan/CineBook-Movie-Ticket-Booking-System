@@ -1,9 +1,7 @@
 const movieContainer = document.getElementById("movie-container");
 
-const contextPath = window.location.pathname
-    .split("/")
-    .slice(0, 2)
-    .join("/");
+const scriptPath = new URL(document.currentScript.src).pathname;
+const contextPath = scriptPath.slice(0, scriptPath.lastIndexOf("/js/"));
 
 fetch(`${contextPath}/data/movies.json`)
     .then(response => {
