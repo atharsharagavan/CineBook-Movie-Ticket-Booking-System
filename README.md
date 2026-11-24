@@ -1,145 +1,156 @@
- CineBook — Movie Ticket Booking System
+# CineBook — Movie Ticket Booking System
 
-A web-based movie ticket booking application developed using Java, JSP, Jakarta Servlets, HTML, CSS, JavaScript, and MongoDB.
+CineBook is a Java web application for browsing movies, creating an account, booking tickets, and viewing booking history. It uses JSP and Jakarta Servlets on Apache Tomcat, with MongoDB for user and booking data.
 
-CineBook allows users to explore movies, create an account, log in, book movie tickets, and view their booking history through a simple and user-friendly interface.
+## Live application
 
- Features
+**Open CineBook:** [https://cine-book-movie-ticket-booking-syst.vercel.app/](https://cine-book-movie-ticket-booking-syst.vercel.app/)
 
-- User Registration — Create a new account securely.
-- User Authentication — Login and logout functionality.
-- Movie Listings — Browse available movies dynamically.
-- Movie Booking — Select a movie, show date, show time, and number of seats.
-- Booking Confirmation — View booking confirmation after submitting a booking.
-- My Bookings — Access previously recorded bookings.
-- Password Hashing — BCrypt-based password hashing.
-- Database Integration — Store user and booking information using MongoDB.
-- Responsive UI — Styled pages for a better user experience.
+The Vercel deployment runs the application in a Tomcat container. Movie listings come from the project's `src/main/webapp/data/movies.json` file. Registration, login, and bookings need a reachable MongoDB database.
 
- Tech Stack
+## Screenshots
 
-Component| Technology
-Frontend| HTML, CSS, JavaScript
-Backend| Java
-Web Technology| JSP, Jakarta Servlets
-Database| MongoDB
-Server| Apache Tomcat 11
-IDE| Eclipse IDE
-Authentication| BCrypt
+Screenshots below show the public live application. The forms are empty; no account information is included.
 
- Project Structure
+### Home and movie listings
 
+![CineBook home page and featured movies](docs/screenshots/homepage.jpg)
+
+### Login
+
+![CineBook login page](docs/screenshots/login.jpg)
+
+### Create an account
+
+![CineBook registration page](docs/screenshots/register.jpg)
+
+## Features
+
+- Browse movie listings, posters, descriptions, ratings, show times, and ticket prices.
+- Register and log in with BCrypt password hashing.
+- Book 1–10 seats for a supported movie and future show date.
+- See a booking confirmation and view your booking history.
+- Protect booking and account pages with Java sessions and an authentication filter.
+- Use a responsive interface on desktop and mobile devices.
+
+## Technology
+
+| Area | Technology |
+| --- | --- |
+| Frontend | HTML, CSS, JavaScript |
+| Web application | Java, JSP, Jakarta Servlets |
+| Servlet container | Apache Tomcat 11 |
+| Database | MongoDB |
+| Password hashing | jBCrypt |
+| Production hosting | Vercel container deployment |
+
+MongoDB and BCrypt driver JARs are included in `src/main/webapp/WEB-INF/lib`. This Eclipse project does not use Maven or Gradle.
+
+## Project layout
+
+```text
 CineBook/
-├── src/
-│   └── main/
-│       ├── java/
-│       │   └── com/cinebook/
-│       │       ├── AuthFilter.java
-│       │       ├── BookingServlet.java
-│       │       ├── LoginServlet.java
-│       │       ├── LogoutServlet.java
-│       │       ├── MongoDBConnection.java
-│       │       ├── MongoDBTest.java
-│       │       ├── MyBookingsServlet.java
-│       │       └── RegisterServlet.java
-│       │
-│       └── webapp/
-│           ├── css/
-│           ├── js/
-│           ├── images/
-│           ├── data/
-│           │   └── movies.json
-│           ├── WEB-INF/
-│           ├── index.jsp
-│           ├── login.jsp
-│           ├── register.jsp
-│           ├── booking.jsp
-│           ├── booking-success.jsp
-│           └── my-bookings.jsp
-│
+├── src/main/java/com/cinebook/     # Servlets, authentication filter, MongoDB connection
+├── src/main/webapp/
+│   ├── css/                         # Page styles
+│   ├── data/movies.json             # Movie catalogue
+│   ├── images/                      # Movie posters
+│   ├── js/                          # Frontend movie loading
+│   ├── WEB-INF/lib/                 # MongoDB and BCrypt libraries
+│   ├── WEB-INF/web.xml              # Web application configuration
+│   └── *.jsp                        # Home, login, registration, booking pages
+├── Dockerfile                       # Local/general Tomcat container
+├── Dockerfile.vercel                # Vercel deployment container
 └── README.md
+```
 
- Prerequisites
+## Run locally in Eclipse
 
-Before running the project, install:
+### Requirements
 
-- Java JDK
+- Java JDK 17 or newer
 - Eclipse IDE for Enterprise Java and Web Developers
 - Apache Tomcat 11
-- MongoDB Community Server or MongoDB Atlas
-- MongoDB Java Driver dependencies
+- A local MongoDB server or a MongoDB Atlas cluster
 
- Getting Started
+### Steps
 
-1. Clone the repository
+1. Clone the repository:
 
-git clone https://github.com/atharsharagan/CineBook-Movie-Ticket-Booking-System.git
+   ```bash
+   git clone https://github.com/atharsharagavan/CineBook-Movie-Ticket-Booking-System.git
+   ```
 
-2. Import into Eclipse
+2. In Eclipse, choose **File → Import → General → Existing Projects into Workspace**, select the cloned `CineBook` folder, and finish the import.
+3. Configure Tomcat 11 in Eclipse and add the CineBook project to the server.
+4. Configure the database connection as described below.
+5. Start Tomcat and open:
 
-1. Open Eclipse IDE.
-2. Select File → Import.
-3. Choose General → Existing Projects into Workspace.
-4. Select the cloned CineBook folder.
-5. Click Finish.
+   ```text
+   http://localhost:8080/CineBook/
+   ```
 
-3. Configure MongoDB
+If Eclipse deploys the application with a different context path, use that path in the URL.
 
-Make sure MongoDB is running and configure the connection in "MongoDBConnection.java".
+## Configure MongoDB
 
-Example local connection:
+The application reads the connection string from the `MONGODB_URI` environment variable. If it is unset, the local default is:
 
+```text
 mongodb://localhost:27017
+```
 
-Database name:
+The application uses the database named `cinebook`. It creates/uses the `user` collection for accounts and the `bookings` collection for bookings.
 
-cinebook
+### Local MongoDB
 
-Ensure the required MongoDB Java driver dependencies are available in the project.
+Start MongoDB locally and leave `MONGODB_URI` unset, or set it to your local connection string. In Eclipse, environment variables can be added to the Tomcat server launch configuration.
 
-For MongoDB Atlas, use your own connection URI and keep credentials out of the source code.
+### MongoDB Atlas
 
-4. Run the application
+1. Make sure the Atlas cluster is active (resume it if it has paused).
+2. Create a database user with only the permissions the app needs.
+3. Add the application host to the Atlas project's **Network Access → IP Access List**.
+4. Copy the cluster's driver connection string and substitute your database user's credentials. URL-encode special characters in the username or password.
+5. Set the completed string as `MONGODB_URI` in the app's environment.
 
-1. Configure Apache Tomcat 11 in Eclipse.
-2. Add the CineBook project to the server.
-3. Start the server.
-4. Open your browser and visit:
+Do not commit the connection string, database password, or a `.env` file to GitHub.
 
-http://localhost:8080/CineBook/
+> You can open the live site and browse the movie catalogue from any device with Internet access. Registration, login, and booking history require MongoDB, so those features will not work while the Atlas cluster is paused. To use them again, resume the cluster in Atlas; you do not need to restart or redeploy the Vercel app.
 
- Security
+## Vercel deployment
 
-- Passwords are hashed using BCrypt.
-- Authentication is managed using Java sessions.
-- Protected pages use an authentication filter.
-- Database credentials should be stored securely and never committed to a public repository.
+The linked Vercel project deploys the GitHub `main` branch using `Dockerfile.vercel`.
 
-Application Modules
+For a new Vercel project:
 
-Module| Description
-Home| Browse available movies
-Register| Create a user account
-Login| Authenticate users
-Booking| Select movie and show details
-Booking Confirmation| Display submitted booking details
-My Bookings| View booking history
+1. Import this GitHub repository into Vercel.
+2. Configure the project to build with `Dockerfile.vercel`.
+3. Add `MONGODB_URI` in **Project Settings → Environment Variables**. Store it as a secret and enable it for Production (and Preview if needed).
+4. Ensure the Atlas cluster is active and Atlas Network Access permits connections from the Vercel deployment.
+5. Deploy. When you change environment variables, redeploy so the new deployment receives them.
 
-Future Enhancements
+The live site is public. Never put `MONGODB_URI` in frontend code or expose it to the browser. If the Atlas IP access list contains `0.0.0.0/0`, it allows connection attempts from any IPv4 address; remove that rule when you can use a narrower access method.
 
-- Real-time seat availability
-- Online payment gateway integration
-- Movie search and filtering
-- Admin dashboard for movie management
-- Email booking confirmation
-- Deployment with a cloud-hosted database
+## Troubleshooting
 
- Developer
+- **Home page works, but registration/login/booking fails:** verify `MONGODB_URI` is set in Vercel Production, redeploy after changing it, confirm the Atlas cluster is running, and check Atlas Network Access.
+- **Atlas times out or refuses connections:** confirm the cluster is active and its IP access list permits the deployment's outbound connection.
+- **Local app cannot connect:** confirm MongoDB is running locally or set `MONGODB_URI` in Eclipse's Tomcat launch configuration.
+- **Changes do not appear on Vercel:** check the latest deployment in the Vercel project and confirm the commit was pushed to `main`.
 
-Atharsha Ragan
+## Current limitations
 
-GitHub: "@atharsharagan" (https://github.com/atharsharagan)
+- Movie data is a static JSON catalogue; movie administration, search, and filtering are not implemented.
+- Seat inventory is not tracked, so the app does not prevent multiple users from selecting the same seats.
+- Payment processing and email confirmations are not implemented.
+- The ticket price and supported show times are currently defined by the application.
 
- License
+## Developer
 
-This project was developed for academic and educational purposes.
+**Atharsha Ragan**  
+GitHub: [@atharsharagavan](https://github.com/atharsharagavan)
+
+## License
+
+No separate license file is currently included in this repository. Add a `LICENSE` file before redistributing the project under a specific open-source license.
